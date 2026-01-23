@@ -33,11 +33,19 @@ router.post("/api/login", (req, res) => {
   }
 
   const token = generateToken(user.id);
+  //SET cookie (token)
+  res.setHeader("Set-Cookie", `token=${token}; Path=/; Max-Age=3600; SameSite=Lax; HttpOnly`)
+  
   return res.json({
     token,
     userId: user.id,
   });
 });
+
+router.post("/api/logout",(req, res) => {
+    res.setHeader("Set-Cookie","token='';Path=/; Max-Age=-1; SameSite=Lax; HttpOnly")
+    return res.json({message:"success"})
+})
 
 /** ✅
  * GET /api/user-info
@@ -60,6 +68,11 @@ router.get("/api/user-info", authenticateToken, (req, res) => {
     0
   );
 
+  const totalBurnedCalories = runningData.reduce(
+    (sum, session) => sum + session.caloriesBurned,
+    0
+  );
+
   // Extract user profile information
   const userProfile = {
     firstName: user.userInfos.firstName,
@@ -69,6 +82,8 @@ router.get("/api/user-info", authenticateToken, (req, res) => {
     weight: user.userInfos.weight,
     height: user.userInfos.height,
     profilePicture: user.userInfos.profilePicture,
+    gender:user.userInfos.gender,
+    weeklyGoal:user.weeklyGoal
   };
 
   return res.json({
@@ -77,7 +92,9 @@ router.get("/api/user-info", authenticateToken, (req, res) => {
       totalDistance,
       totalSessions,
       totalDuration,
+      totalBurnedCalories:totalBurnedCalories
     },
+   
   });
 });
 
