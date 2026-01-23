@@ -86,9 +86,14 @@
     {"date":"2025-12-14","distance":4.5,"duration":30,"heartRate":{"min":144,"max":178,"average":166},"caloriesBurned":330},
     {"date":"2025-12-21","distance":3.8,"duration":25,"heartRate":{"min":145,"max":180,"average":168},"caloriesBurned":285},
     {"date":"2025-12-28","distance":5,"duration":33,"heartRate":{"min":143,"max":177,"average":165},"caloriesBurned":360},
+    {"date":"2025-12-29","distance":5,"duration":33,"heartRate":{"min":143,"max":177,"average":165},"caloriesBurned":360},
     {"date":"2026-01-04","distance":5.5,"duration":36,"heartRate":{"min":142,"max":177,"average":164},"caloriesBurned":390},
     {"date":"2026-01-11","distance":6.3,"duration":41,"heartRate":{"min":141,"max":177,"average":163},"caloriesBurned":445},
     {"date":"2026-01-18","distance":4.8,"duration":31,"heartRate":{"min":143,"max":178,"average":166},"caloriesBurned":345},
+    {"date":"2026-01-19","distance":4.8,"duration":31,"heartRate":{"min":143,"max":178,"average":166},"caloriesBurned":345},
+    {"date":"2026-01-20","distance":4.8,"duration":31,"heartRate":{"min":143,"max":178,"average":166},"caloriesBurned":345},
+    {"date":"2026-01-21","distance":7,"duration":45,"heartRate":{"min":140,"max":176,"average":162},"caloriesBurned":490},
+    {"date":"2026-01-22","distance":7,"duration":45,"heartRate":{"min":140,"max":176,"average":162},"caloriesBurned":490},
     {"date":"2026-01-25","distance":7,"duration":45,"heartRate":{"min":140,"max":176,"average":162},"caloriesBurned":490},
     {"date":"2026-02-01","distance":5.8,"duration":38,"heartRate":{"min":142,"max":177,"average":164},"caloriesBurned":410},
     {"date":"2026-02-08","distance":8.2,"duration":53,"heartRate":{"min":139,"max":178,"average":162},"caloriesBurned":570},
@@ -367,7 +372,7 @@
   },
   {
     "id": "user789",
-    "goal": 3,
+    "weeklyGoal": 3,
     "userInfos": {
       "firstName": "Emma",
       "lastName": "Leroy",
