@@ -1,34 +1,42 @@
-import { useEffect, useState, type FormEvent, type FormEventHandler } from "react";
-import { useNavigate } from "react-router";
+import {useContext, useEffect, useState, type FormEvent } from "react";
+import {useNavigate } from "react-router";
+import { useFetch } from "~/hooks/useFetch";
+import { UserDataContext } from "~/providers/userProvider";
 
 
 export function Form() {
   const [error,setError] = useState("")
+  const [username,setUsername] = useState<FormDataEntryValue>("")
+  const [password,setPassword] = useState<FormDataEntryValue>("")
   const navigate = useNavigate()
-
+  const [canFetch,setCanFetch] = useState(false)
+  const {data} = useFetch({method:"POST",url:"api/login",body:{username,password},canFetch:canFetch})
+  const userContext = useContext(UserDataContext)
+  
     async function onSubmit(e:FormEvent<HTMLFormElement>){
-            e.preventDefault()
-            const formData = new FormData(e.currentTarget)
-            const password = formData.get("password")
-            const username = formData.get("username")
-            
-            const res = await fetch("http://localhost:8000/api/login",{
-              method:"POST",
-              headers:{
-                "Content-type":"application/json"
-              },
-              body:JSON.stringify({password,username})
-            })
+      e.preventDefault()
+      const formData = new FormData(e.currentTarget)
+      const password = formData.get("password") ?? "s"
+      const username = formData.get("username") ?? ""
+      setUsername(username)
+      setPassword(password)
+      setCanFetch(true)
+    }
 
-            const data = await res.json();
 
-            if (data.message) {
-                setError(data.message)
-            }
-            if (data.token) {
-                navigate("/dashboard")
-            }
-        }
+    useEffect(()=>{
+      if (data?.message) {
+        setError(data.message)
+        setCanFetch(false)
+      }else{
+        if(data?.token){
+          userContext.setToken(data.token)
+          navigate("/profile")
+        } 
+      }
+      
+    },[data])
+
 
     function removeErrorOnChange(){
         if (error) {
@@ -37,10 +45,8 @@ export function Form() {
     }
 
     return (
-    <form onSubmit={onSubmit}>
-
+    <form onSubmit={onSubmit} method="POST">
       {error && <p className="text-red-500 mb-2">{error}</p>}
-
       <div className="mb-6">
         <label className="mb-2" htmlFor="username">Username</label>
         <input
@@ -61,11 +67,9 @@ export function Form() {
           onChange={removeErrorOnChange}
         />
       </div>
-      <button className="mt-[40px] text-white" type="submit">
+      <button className="mt-[40px] text-white cursor-pointer" type="submit">
         Se connecter
       </button>
-
-    
     </form>
   );
 }
