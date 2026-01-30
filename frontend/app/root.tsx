@@ -11,7 +11,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import { Header } from "./components/header/Header";
-import { sessionExist, UserContext } from "./providers/userProvider";
+import { UserContext } from "./providers/userProvider";
 import { Footer } from "./components/footer/Footer";
 import { Error} from "./Error/Error";
 
@@ -57,8 +57,7 @@ export default function App() {
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   
   let statusError = 404;
-  let details = "An unexpected error occurred.";
-  let stack: string | undefined;
+ 
 
   if (isRouteErrorResponse(error)) {
       statusError = error.status === 404 ? 404 : 500;

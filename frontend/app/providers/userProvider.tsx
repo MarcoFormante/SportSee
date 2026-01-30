@@ -57,14 +57,12 @@ export const UserDataContext = createContext<Context>({
 export function UserContext({children}:{children:React.ReactNode}){
     const [profile, setProfile] = useState({} as typeof initialData)
     const [token,setToken] = useState("")
-    const {pathname} = useLocation()
 
     useEffect(()=>{
         if(sessionExist){
             if (token) {
                 sessionStorage.setItem("token",token)
             }
-            console.log(profile);
             
              if (!profile?.firstName && token && sessionStorage.getItem("profile")) {
                 setProfile(JSON.parse(sessionStorage.getItem("profile") ?? ""))

@@ -16,8 +16,13 @@ export function Form() {
     async function onSubmit(e:FormEvent<HTMLFormElement>){
       e.preventDefault()
       const formData = new FormData(e.currentTarget)
-      const password = formData.get("password") ?? "s"
+      const password = formData.get("password") ?? ""
       const username = formData.get("username") ?? ""
+
+      if (!password || !username) {
+        setError("Identifiant et mot de passe obligatoires")
+        return 
+      }
       setUsername(username)
       setPassword(password)
       setCanFetch(true)

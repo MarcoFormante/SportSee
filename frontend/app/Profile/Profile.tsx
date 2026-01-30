@@ -63,11 +63,22 @@ export function ProfilePage() {
               <p className="text-[14px] text-[#707070]">depuis le {formatDate(context.profile?.createdAt)}</p>
             </div>
             <div className="grid grid-cols-2 gap-[19px] text-white mt-[32px]  ">
-              <StatisticCard title={"Temps total couru"} statistic={(context.profile?.statistics?.totalDuration / (60 )).toFixed(0) + "h"} context={(context.profile?.statistics?.totalDuration - 100 / (60)).toFixed(2).toString().split(".")[1]+"min"}/>
-              <StatisticCard title={"Calories brûlées"} statistic={context.profile?.statistics?.totalBurnedCalories} context={"cal"}/>
-              <StatisticCard title={"Distance totale parcourue"} statistic={context.profile?.statistics?.totalDistance} context={"km"}/>
-              <StatisticCard title={"Nombre de jours de repos"} statistic={"9"} context={"jours"}/>
-              <StatisticCard title={"Nombre de sessions"}  statistic={context.profile?.statistics?.totalSessions} context={"session"}/>
+              {context.profile?.statistics  ? 
+              <>
+                <StatisticCard title={"Temps total couru"} statistic={(context.profile?.statistics?.totalDuration / (60 )).toFixed(0) + "h"} context={(context.profile?.statistics?.totalDuration - 100 / (60)).toFixed(2).toString().split(".")[1]+"min"}/>
+                <StatisticCard title={"Calories brûlées"} statistic={context.profile?.statistics?.totalBurnedCalories} context={"cal"}/>
+                <StatisticCard title={"Distance totale parcourue"} statistic={context.profile?.statistics?.totalDistance} context={"km"}/>
+                <StatisticCard title={"Nombre de jours de repos"} statistic={"9"} context={"jours"}/>
+                <StatisticCard title={"Nombre de sessions"}  statistic={context.profile?.statistics?.totalSessions} context={"session"}/>           
+              </>
+             
+              :  
+              <div className="statisticCards-loading">
+                  <Loading/>
+              </div>
+             
+              }
+              
             </div>
         </div>
       </div>

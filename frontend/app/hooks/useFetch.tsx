@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 export function useFetch({method,url,body,token = "",canFetch} : {method:string, url:string, body?:null|{},token?:string,canFetch:boolean}){
     const [status,setStatus] = useState(0)
     const [data,setData] = useState<any>(null)
+    const navigate = useNavigate()
 
     useEffect(()=>{
         async function fetchData()
@@ -26,10 +28,15 @@ export function useFetch({method,url,body,token = "",canFetch} : {method:string,
             }
 
             const fetchDataObject = method === "POST" ? postObject : getObject
-            const req = await fetch("http://localhost:8000/" + url, fetchDataObject)
-            setStatus(req.status)
-            setData(await req.json())
+            try {
+                const req = await fetch("http://localhost:8000/" + url, fetchDataObject)
+                setStatus(req.status)
+                setData(await req.json())
+            } catch (error) {
+                navigate("/")
+            }
         }
+
         if (canFetch === true) {
             fetchData()
         }

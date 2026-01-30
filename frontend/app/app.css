@@ -77,3 +77,9 @@ form button{
   color: rgba(17, 17, 17, 1);
 }
 
+
+.statisticCards-loading{
+  position: relative;
+  left:50%;
+  transform: translateX(50%);
+}
