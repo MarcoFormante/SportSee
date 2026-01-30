@@ -23,13 +23,13 @@ router.post("/api/login", (req, res) => {
   if (!username || !password) {
     return res
       .status(400)
-      .json({ message: "username and password are required" });
+      .json({ message: "Identifiant et mot de passe obligatoires" });
   }
 
   const user = users.find((u) => u.username === username);
 
   if (!user || user.password !== password) {
-    return res.status(401).json({ message: "Invalid credentials" });
+    return res.status(401).json({ message: "Identifiants invalides" });
   }
 
   const token = generateToken(user.id);
