@@ -1,9 +1,8 @@
 'use client'
-import { Suspense, useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Navigate, useLoaderData, useNavigate} from "react-router"
-import { initialData, sessionExist, UserDataContext } from "~/providers/userProvider"
+import { sessionExist, UserDataContext } from "~/providers/userProvider"
 import UserCard from "~/components/userProfile/UserCard"
-import { StatisticCard } from '../components/statisticCard/StatisticCard';
 import { PerformanceContainer } from '../components/performanceStat/PerformanceContainer';
 import { PerformanceKm } from "~/components/performanceStat/PerformanceKm"
 import { PerformanceBpm } from "~/components/performanceStat/PerformanceBpm"
